@@ -2,8 +2,8 @@
 version: 2.1
 
 commands:
-  print-workflow-id:
-      description: "Prints out the pipeline ID"
+  print-circle-variable:
+      description: "Prints out the Environment Variable"
       parameters:
         to:
            type: string
@@ -56,7 +56,7 @@ jobs:
       - run:
           name: "Prints the output Hello World to a txt file"
           command: "cat ~/output.txt"
-  print-workflow-number:
+  print-branch-name:
       docker: 
          - image: $LIGHT_IMG
       steps:
@@ -66,4 +66,5 @@ jobs:
 workflows:
   print-hello-world-workflow:
     jobs:
-      - print-workflow-number
+      - print-branch-name:
+          to: "$CIRCLE_BRANCH"
