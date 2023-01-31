@@ -21,7 +21,7 @@ jobs:
           command: "echo World!"
   print-dev-name:
      docker:
-       - image: $DOCK_NODE_IMG
+       - image: $LIGHT_IMG
      steps:
       - run:
           name: "Print the Developer Name using Environment Variables"
