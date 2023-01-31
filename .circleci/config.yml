@@ -45,7 +45,7 @@ jobs:
           at: ~/
       - run:
           name: "Prints the output Hello World to a txt file"
-          command: "cat output.txt"
+          command: "cat ~/output.txt"
 
 
 # Invoke jobs via workflows
