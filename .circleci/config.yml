@@ -67,11 +67,18 @@ jobs:
          - image: $LIGHT_IMG
       steps:
           - print-circle-variable
-
+  creates-error-purpose:
+      docker: 
+         - image: $DOCK_NODE_IMG
+      steps:
+          - run:
+             command: return 1
+          - run:
+             command: echo "Hello, Error"
+             when: on_fail
 
 # Invoke jobs via workflows
 workflows:
   print-hello-world-workflow:
     jobs:
-      - print-branch-name
-      - print-workflow-id
+      - creates-error-purpose
