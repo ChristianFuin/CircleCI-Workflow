@@ -26,10 +26,33 @@ jobs:
       - run:
           name: "Print the Developer Name using Environment Variables"
           command: "echo The Dev Name is ${DEV_NAME}"
+  save-hello-world-output:
+     docker:
+       - image: $LIGHT_IMG
+     steps:
+      - run:
+          name: "Saves the output Hello World to a txt file"
+          command: "echo 'Hello World' > output.txt"
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - "output.txt"
+  print-hello-world-output:
+     docker:
+       - image: $LIGHT_IMG
+     steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: "Prints the output Hello World to a txt file"
+          command: "cat output.txt"
 
 
 # Invoke jobs via workflows
 workflows:
   print-hello-world-workflow:
     jobs:
-      - print-dev-name
+      - save-hello-world-output
+      - print-hello-world-output:
+          requires:
+            - "save-hello-world-output"
