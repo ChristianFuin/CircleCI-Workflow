@@ -67,4 +67,4 @@ jobs:
 workflows:
   print-hello-world-workflow:
     jobs:
-      - print-branch-number
+      - print-branch-name
