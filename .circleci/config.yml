@@ -25,7 +25,7 @@ jobs:
      steps:
       - run:
           name: "Print the Developer Name using Environment Variables"
-          command: "echo The Dev Name is <<pipeline.DEV_NAME>>"
+          command: "echo The Dev Name is ${DEV_NAME}"
 
 
 # Invoke jobs via workflows
