@@ -60,8 +60,7 @@ jobs:
       docker: 
          - image: $LIGHT_IMG
       steps:
-        - run:
-           print-workflow-id
+          - print-workflow-id
 
 # Invoke jobs via workflows
 workflows:
