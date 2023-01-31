@@ -1,6 +1,16 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 version: 2.1
 
+commands:
+  print-workflow-id:
+      description: "Prints out the pipeline ID"
+      parameters:
+        to:
+           type: string
+           default: $CIRCLE_WORKFLOW_ID
+      steps:
+         - run: echo <<parameters.to>>
+
 # Define a job to be invoked later in a workflow.
 jobs:
   print-hello:
@@ -46,13 +56,15 @@ jobs:
       - run:
           name: "Prints the output Hello World to a txt file"
           command: "cat ~/output.txt"
-
+  print-workflow-number:
+      docker: 
+         - image: $LIGHT_IMG
+      steps:
+        - run:
+           print-workflow-id
 
 # Invoke jobs via workflows
 workflows:
   print-hello-world-workflow:
     jobs:
-      - save-hello-world-output
-      - print-hello-world-output:
-          requires:
-            - "save-hello-world-output"
+      - print-workflow-number
