@@ -60,11 +60,18 @@ jobs:
       docker: 
          - image: $LIGHT_IMG
       steps:
-          - print-workflow-id:
+          - print-circle-variable:
              to: "$CIRCLE_BRANCH"
+  print-workflow-id:
+      docker: 
+         - image: $LIGHT_IMG
+      steps:
+          - print-circle-variable
+
 
 # Invoke jobs via workflows
 workflows:
   print-hello-world-workflow:
     jobs:
       - print-branch-name
+      - print-workflow-id
